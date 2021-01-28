@@ -2,7 +2,10 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
-var cors = require("cors");
+const cors = require("cors");
+const helmet = require("helmet")
+require("dotenv").config()
+
 
 /************************** MidlleWare ****************************/
 app.use(express.urlencoded({ extended: false }));
@@ -22,6 +25,7 @@ app.use(cors());
 //   next();
 // };
 // app.use(allowCrossDomain);
+app.use(helmet)
 
 /************************** connection mysql ***********************/
 const connection = require("./database/db");
@@ -34,7 +38,7 @@ require("./routes/mailRouter")(app)
 require("./routes/archiveRoutes")(app, connection)
 require("./routes/carousselRoutes")(app, connection)
 
-app.listen(8080, function () {
+app.listen(process.env.PORT || 8080, function () {
   console.log("server listening on: http://localhost:8080/");
 });
 
