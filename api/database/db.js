@@ -1,14 +1,21 @@
 const mysql = require("mysql2");
 const adminSql = require('../sql/adminSql')
 require('dotenv').config();
-
+// ionos Database for deploy
 const connection = mysql.createConnection({
   host: "db5001572760.hosting-data.io",
   user: "dbu834634",
-  password: "alexandreAdmin05!",
+  password: process.env.PASSWORDDB,
   database: "dbs1311187",
   port: 3306
 });
+
+// const connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "alexandre",
+//   database: "yann",
+// });
 
 connection.connect(function (err) {
   if (err) throw err;
